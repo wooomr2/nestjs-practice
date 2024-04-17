@@ -1,14 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity({ name: 'image' })
 export class ImageEntity {
+  @PrimaryGeneratedColumn({ name: 'seq' })
+  seq: number
 
-    @PrimaryGeneratedColumn({ name: 'seq' })
-    seq: number
+  @Column({ name: 'board_no' })
+  boardNo: number
 
-    @Column({ name: 'board_no' })
-    boardNo: number
-
-    @Column({ name: 'url' })
-    url: string
+  @Column({ name: 'url' })
+  url: string
 }

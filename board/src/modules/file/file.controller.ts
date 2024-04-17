@@ -1,15 +1,14 @@
-import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { config } from 'dotenv';
-import { FileService } from './file.service';
-import { Response } from 'express';
+import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { config } from 'dotenv'
+import { FileService } from './file.service'
+import { Response } from 'express'
 
 config()
 
 @Controller('/api/v1/file')
 export class FileController {
-  
-  constructor(private readonly fileService: FileService) { }
+  constructor(private readonly fileService: FileService) {}
 
   @Post('/upload')
   @UseInterceptors(FileInterceptor('file'))

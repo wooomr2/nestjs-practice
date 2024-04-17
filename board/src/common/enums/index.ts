@@ -1,8 +1,4 @@
-import { ResCode } from "./res-code";
-import { ResMessage } from "./res-message";
+import { ResCode } from './res-code'
+import { ResMessage } from './res-message'
 
-export {
-    ResCode,
-    ResMessage
-};
-
+export { ResCode, ResMessage }

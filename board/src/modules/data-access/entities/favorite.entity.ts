@@ -1,10 +1,10 @@
-import { Entity, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryColumn } from 'typeorm'
 
 @Entity({ name: 'favorite' })
 export class FavoriteEntity {
-    @PrimaryColumn({ name: 'board_no' })
-    boardNo: number
+  @PrimaryColumn({ name: 'board_no' })
+  boardNo: number
 
-    @PrimaryColumn({ name: 'email' })
-    email: string
+  @PrimaryColumn({ name: 'email' })
+  email: string
 }

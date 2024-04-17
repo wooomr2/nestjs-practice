@@ -1,15 +1,15 @@
 export interface IBoardItem {
-    boardNo: number
+  boardNo: number
 
-    title: string
-    content: string
+  title: string
+  content: string
 
-    favoriteCnt: number
-    commentCnt: number
-    viewCnt: number
+  favoriteCnt: number
+  commentCnt: number
+  viewCnt: number
 
-    wirteDatetime: string
+  wirteDatetime: string
 
-    nickname: string
-    profileImg: string | null
+  nickname: string
+  profileImg: string | null
 }

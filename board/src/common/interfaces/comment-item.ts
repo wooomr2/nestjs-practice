@@ -1,8 +1,8 @@
 export interface ICommentItem {
-    commentNo: number
-    content: string
-    writeDatetime: string
+  commentNo: number
+  content: string
+  writeDatetime: string
 
-    nickname: string
-    profileImg: string | null
+  nickname: string
+  profileImg: string | null
 }

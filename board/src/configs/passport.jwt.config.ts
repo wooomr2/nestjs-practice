@@ -1,5 +1,5 @@
-import { IAuthModuleOptions } from "@nestjs/passport";
+import { IAuthModuleOptions } from '@nestjs/passport'
 
 export const passportJwtConfig: IAuthModuleOptions<any> = {
-    defaultStrategy: 'jwt'
+  defaultStrategy: 'jwt',
 }
