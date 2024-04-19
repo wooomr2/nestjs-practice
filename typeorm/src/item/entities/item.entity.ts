@@ -1,8 +1,8 @@
-import { AbstractEntity } from 'src/db/abstract.entity'
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne } from 'typeorm'
 import { Comment } from './comment.entity'
 import { Listing } from './listing.entity'
 import { Tag } from './tag.entity'
+import { AbstractEntity } from './abstract.entity'
 
 @Entity()
 export class Item extends AbstractEntity<Item> {

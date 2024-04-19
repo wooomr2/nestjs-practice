@@ -7,9 +7,10 @@ import { Tag } from './entities/tag.entity'
 import { ItemController } from './item.controller'
 import { ItemService } from './item.service'
 import { ItemSubscriber } from './subscribers/item.subscriber'
+import { AbstractEntity } from './entities/abstract.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Item, Listing, Comment, Tag])],
+  imports: [TypeOrmModule.forFeature([AbstractEntity, Item, Listing, Comment, Tag])],
   controllers: [ItemController],
   providers: [ItemService, ItemSubscriber],
 })
