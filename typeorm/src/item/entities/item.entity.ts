@@ -1,11 +1,11 @@
-import { BaseIdEntity } from 'src/db/base-id.entity'
+import { AbstractEntity } from 'src/db/abstract.entity'
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne } from 'typeorm'
 import { Comment } from './comment.entity'
 import { Listing } from './listing.entity'
 import { Tag } from './tag.entity'
 
 @Entity()
-export class Item extends BaseIdEntity<Item> {
+export class Item extends AbstractEntity<Item> {
   @Column()
   name: string
 

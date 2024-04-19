@@ -12,6 +12,7 @@ const dbConfig = (configService: ConfigService): TypeOrmModuleOptions => {
     password: configService.getOrThrow('MYSQL_PASSWORD'),
     autoLoadEntities: true,
     synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
+    logging: ['query', 'error'],
   }
 }
 
