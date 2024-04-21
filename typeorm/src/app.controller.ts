@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common'
+import { Body, Controller, Get, InternalServerErrorException, Post, UseGuards, UseInterceptors } from '@nestjs/common'
 import { AppService } from './app.service'
 import { AuthGuard } from './guards/auth.guard'
 import { LogInterceptor } from './interceptors/log.intercepter'
@@ -30,5 +30,10 @@ export class AppController {
   test(@Body(new FreezePipe()) body: any) {
     body.test = 'qbwjpqwbepoiqwhe'
     return body
+  }
+
+  @Get('/test/exception')
+  testException() {
+    throw new InternalServerErrorException('Internal Server Erorr')
   }
 }
