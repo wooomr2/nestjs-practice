@@ -1,7 +1,7 @@
-import { MongooseModule, getModelToken } from '@nestjs/mongoose'
+import { getModelToken } from '@nestjs/mongoose'
 import { Test } from '@nestjs/testing'
 import { FilterQuery } from 'mongoose'
-import { User, UserSchema } from '../schemas/user.schema'
+import { User } from '../schemas/user.schema'
 import { UserRepository } from '../user.repository'
 import { userStub } from './stubs/user.stub'
 import { UserModel } from './supports/user.model'
@@ -13,7 +13,7 @@ describe('UserRepository', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+      imports: [],
       controllers: [],
       providers: [
         UserRepository,
@@ -41,7 +41,7 @@ describe('UserRepository', () => {
       })
 
       test('then it should call the userModel', () => {
-        expect(userModel.findOne).toHaveBeenCalledWith(userFilterQuery, { _id: 0, __v: 0 })
+        expect(userModel.findOne).toHaveBeenCalledWith(userFilterQuery, { __v: 0, _id: 0 })
       })
 
       test('then it should return a user', () => {
@@ -60,7 +60,7 @@ describe('UserRepository', () => {
       })
 
       test('then it should call the userModel', () => {
-        expect(userModel.find).toHaveBeenCalledWith(userFilterQuery)
+        expect(userModel.find).toHaveBeenCalledWith(userFilterQuery, { __v: 0, _id: 0 })
       })
 
       test('then it should return a user', () => {
@@ -70,7 +70,7 @@ describe('UserRepository', () => {
   })
 
   describe('findOneAndUpdate', () => {
-    it('when findOneAndUpdate is called', () => {
+    describe('when findOneAndUpdate is called', () => {
       let user: User
 
       beforeEach(async () => {
