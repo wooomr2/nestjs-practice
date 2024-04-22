@@ -14,17 +14,17 @@ export class UserController {
   }
 
   @Get()
-  async getUsers(): Promise<User[]> {
+  getUsers(): Promise<User[]> {
     return this.userService.getUsers()
   }
 
   @Post()
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+  createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.userService.createUser(createUserDto.email, createUserDto.age)
   }
 
   @Patch('/:userId')
-  async updateUser(@Param('userId') userId: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+  updateUser(@Param('userId') userId: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
     return this.userService.updateUser(userId, updateUserDto)
   }
 }
