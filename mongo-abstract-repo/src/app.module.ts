@@ -1,17 +1,15 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { config } from 'dotenv';
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import { config } from 'dotenv'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { DatabaseModule } from './database/database.module'
+import { UserModule } from './user/user.module'
 
-config();
+config()
 
 @Module({
-  imports: [
-    MongooseModule.forRoot(
-      `mongodb+srv://${process.env.MONGO_ID}:${process.env.MONGO_PW}@cluster.icwey.mongodb.net/?retryWrites=true&w=majority&appName=Cluster`,
-    ),
-  ],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
