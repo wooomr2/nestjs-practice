@@ -12,7 +12,7 @@ export class AppController {
   }
 
   @Post()
-  createUser(@Body() body: CreateUserRequest): Promise<boolean> {
+  createUser(@Body() body: CreateUserRequest) {
     return this.appService.createUser(body)
   }
 }

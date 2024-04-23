@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
+import { Cron, CronExpression, SchedulerRegistry } from '@nestjs/schedule'
 import { CreateUserRequest } from './dto/create-user.request'
 import { userCreateEvent } from './events/user-create.event'
 
@@ -7,16 +8,27 @@ import { userCreateEvent } from './events/user-create.event'
 export class AppService {
   private readonly logger = new Logger(AppService.name)
 
-  constructor(private readonly eventEmitter: EventEmitter2) {}
+  constructor(
+    private readonly eventEmitter: EventEmitter2,
+    // Dynamic Batch Scheduling
+    private schedulerRegister: SchedulerRegistry
+  ) {}
 
   getHello(): string {
     return 'Hello World!'
   }
 
-  async createUser(body: CreateUserRequest): Promise<boolean> {
+  async createUser(body: CreateUserRequest) {
     this.logger.log('Creating User...')
-    this.eventEmitter.emit('user.create', new userCreateEvent('userID', 'email@email.com'))
-    return true
+    const userId = 'userID'
+    this.eventEmitter.emit('user.create', new userCreateEvent(userId, 'email@email.com'))
+
+    const establishWsTimeout = setTimeout(() => this.#establishWsConnection(userId), 3000)
+    this.schedulerRegister.addTimeout(`establish_ws`, establishWsTimeout)
+  }
+
+  #establishWsConnection(userId: string) {
+    this.logger.log(`Establishing WS connection for user ${userId}...`)
   }
 
   @OnEvent('user.create')
@@ -29,5 +41,10 @@ export class AppService {
     this.logger.log(`Sending welcome gift...  ${payload.email}`)
     await new Promise<void>(resolve => setTimeout(resolve, 2000))
     this.logger.log(`Welcome gift sent to ${payload.email}`)
+  }
+
+  @Cron(CronExpression.EVERY_10_SECONDS, { name: 'deleteExpiredUsers' })
+  deleteExpiredUsers() {
+    this.logger.log('Deleting expired users...')
   }
 }
